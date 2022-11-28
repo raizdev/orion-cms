@@ -1,11 +1,11 @@
 <?php
-namespace KPN\App\Models;
+namespace Orion\Models;
 
-use MinasORM\Database;
+use Orion\Framework\Database\DatabaseModel;
 
-class User extends Database {
+class User extends DatabaseModel {
 
-    protected $table = 'user';
+    protected $table = 'users';
 
     protected $fillables = [
         'id', 'username', 'password', 'mail', 'account_created', 'last_login', 'online', 'last_online', 'motto', 'look', 'gender', 'rank', 'credits', 'auth_ticket', 'avatar_bg'

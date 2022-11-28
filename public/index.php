@@ -16,9 +16,6 @@ use function Sunrise\Http\Router\emit;
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../helper.php';
 
-$dotenv = new \Symfony\Component\Dotenv\Dotenv();
-$dotenv->loadEnv(__DIR__ . '/../.env');
-
 AnnotationRegistry::registerLoader('class_exists');
 
 $loader = new DescriptorLoader();
