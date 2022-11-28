@@ -9,6 +9,9 @@ use Sunrise\Http\Router\Loader\DescriptorLoader;
 use Sunrise\Http\Router\Router;
 use Sunrise\Http\Router\Middleware\CallableMiddleware;
 use Sunrise\Http\Message\ResponseFactory;
+use Orion\Framework\Middleware\ErrorHandlingMiddleware;
+
+use function Sunrise\Http\Router\emit;
 
 require __DIR__ . '/../vendor/autoload.php';
 require __DIR__ . '/../helper.php';
@@ -20,22 +23,16 @@ AnnotationRegistry::registerLoader('class_exists');
 
 $loader = new DescriptorLoader();
 
-$loader->attach('../src/App/Controllers/');
+$loader->attach('../src/Controllers/');
 
 $router = new Router();
-$router->addMiddleware(new CallableMiddleware(function ($request, $handler) {
-    try {
-        return $handler->handle($request);
-    } catch (MethodNotAllowedException $e) {
-        return (new ResponseFactory)->createJsonResponse(501, 'route not found');
-    } catch (RouteNotFoundException $e) {
-        return (new ResponseFactory)->createJsonResponse(404, 'route not found');
-    } catch (Throwable $e) {
-        return (new ResponseFactory)->createJsonResponse(500, 'route not found');
-    }
-}));
 $router->load($loader);
+
+$router->addMiddleware(new ErrorHandlingMiddleware());
 
 $request = ServerRequestFactory::fromGlobals();
 $response = $router->run($request);
-echo $response->getBody();
+
+emit($response);
+
+exit(0);

@@ -1,0 +1,63 @@
+{% extends "base.twig" %}
+{% set nav = "personalisation" %}
+{% block body %}
+<div class="bg-lush-content-bg d-flex flex-column h-100">
+  <div class="row py-4">
+    <div class="col-md-1">
+      <div class="card mb-15p">
+        <div class="card-header black">{{ lang('website.settings.panel_settings' )}}</div>
+        <div class="p-2">
+          <div class="list-group">
+            <a href="/settings/password">
+              <div class="list-group-item"> {{ lang('website.settings.panel_security' )}} </div>
+            </a>
+          </div>
+          <a href="/settings/personalisation">
+            <div class="list-group-item active"> {{ lang('website.settings.panel_personalisation' )}} </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-header orange">{{ lang('website.settings.personalisation' )}}</div>
+        <div class="p-2">
+          <h6>{{ lang('website.settings.avatar_bg' )}}:</h6>
+          <div class="background-grid">
+            <div class="background-grid-item card backgroundSwitcher {% if player.avatar_bg == 01 %}selected{% endif %}" value="01" style="background-image: url(/assets/images/avatar_backgrounds/01.gif);"></div>
+            <div class="background-grid-item card backgroundSwitcher {% if player.avatar_bg == 02 %}selected{% endif %}" value="02" style="background-image: url(/assets/images/avatar_backgrounds/02.gif);"></div>
+            <div class="background-grid-item card backgroundSwitcher {% if player.avatar_bg == 03 %}selected{% endif %}" value="03" style="background-image: url(/assets/images/avatar_backgrounds/03.gif);"></div>
+            <div class="background-grid-item card backgroundSwitcher {% if player.avatar_bg == 04 %}selected{% endif %}" value="04" style="background-image: url(/assets/images/avatar_backgrounds/04.gif);"></div>
+            <div class="background-grid-item card backgroundSwitcher {% if player.avatar_bg == 05 %}selected{% endif %}" value="05" style="background-image: url(/assets/images/avatar_backgrounds/05.gif);"></div>
+            <div class="background-grid-item card backgroundSwitcher {% if player.avatar_bg == 06 %}selected{% endif %}" value="06" style="background-image: url(/assets/images/avatar_backgrounds/06.gif);"></div>
+            <div class="background-grid-item card backgroundSwitcher {% if player.avatar_bg == 07 %}selected{% endif %}" value="07" style="background-image: url(/assets/images/avatar_backgrounds/07.gif);"></div>
+            <div class="background-grid-item card backgroundSwitcher {% if player.avatar_bg == 08 %}selected{% endif %}" value="08" style="background-image: url(/assets/images/avatar_backgrounds/08.gif);"></div>
+            <div class="background-grid-item card backgroundSwitcher {% if player.avatar_bg == 09 %}selected{% endif %}" value="09" style="background-image: url(/assets/images/avatar_backgrounds/09.gif);"></div>
+            <div class="background-grid-item card backgroundSwitcher {% if player.avatar_bg == 10 %}selected{% endif %}" value="10" style="background-image: url(/assets/images/avatar_backgrounds/10.gif);"></div>
+            <div class="background-grid-item card backgroundSwitcher {% if player.avatar_bg == 11 %}selected{% endif %}" value="11" style="background-image: url(/assets/images/avatar_backgrounds/11.gif);"></div>
+            <div class="background-grid-item card backgroundSwitcher {% if player.avatar_bg == 12 %}selected{% endif %}" value="12" style="background-image: url(/assets/images/avatar_backgrounds/12.gif);"></div>
+            <div class="background-grid-item card backgroundSwitcher {% if player.avatar_bg == 13 %}selected{% endif %}" value="13" style="background-image: url(/assets/images/avatar_backgrounds/13.gif);"></div>
+            <div class="background-grid-item card backgroundSwitcher {% if player.avatar_bg == 14 %}selected{% endif %}" value="14" style="background-image: url(/assets/images/avatar_backgrounds/14.gif);"></div>
+            <div class="background-grid-item card backgroundSwitcher {% if player.avatar_bg == 15 %}selected{% endif %}" value="15" style="background-image: url(/assets/images/avatar_backgrounds/15.gif);"></div>
+            <div class="background-grid-item card backgroundSwitcher {% if player.avatar_bg == 16 %}selected{% endif %}" value="16" style="background-image: url(/assets/images/avatar_backgrounds/16.gif);"></div>
+            <div class="background-grid-item card backgroundSwitcher {% if player.avatar_bg == 17 %}selected{% endif %}" value="17" style="background-image: url(/assets/images/avatar_backgrounds/17.gif);"></div>
+            <div class="background-grid-item card backgroundSwitcher {% if player.avatar_bg == 18 %}selected{% endif %}" value="18" style="background-image: url(/assets/images/avatar_backgrounds/18.gif);"></div>
+            <div class="background-grid-item card backgroundSwitcher {% if player.avatar_bg == 19 %}selected{% endif %}" value="19" style="background-image: url(/assets/images/avatar_backgrounds/19.gif);"></div>
+            <div class="background-grid-item card backgroundSwitcher {% if player.avatar_bg == 20 %}selected{% endif %}" value="20" style="background-image: url(/assets/images/avatar_backgrounds/20.gif);"></div>
+          </div>
+          <label class="small text-muted"> {{ lang('website.settings.avatar_bg_desc' )}} </label>
+          <hr>
+            <h6>{{ lang('website.settings.youtube' )}}:</h6>
+            <form action="settings/personalisation/youtube" method="post">
+              <div class="d-block d-md-flex flex-row">
+                <span class="flex-shrink-0 align-self-center">https://www.youtube.com/watch?v=</span>
+                <input type="text" class="form-control form-control-sm mx-0 mx-md-1 align-self-center" name="youtube" value="{{youtube.data}}">
+                <button class="llbtn llbtn-sm llbtn-success align-self-center"> {{ lang('website.settings.save' )}} </button>
+              </div>
+            </form>
+            <label class="small text-muted"> {{ lang('website.settings.youtube_desc' )}} </label>
+          </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

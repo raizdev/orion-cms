@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html class="h-100">
+  <head>
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lost - {{ config('website_settings.name') }}</title>
+    <meta name="description" content="Virtual world for young people where you can make and meet friends. Meet and make friends, chat with others, create your own avatar, design your own room for free and much more ...">
+    <meta name="keywords" content="cosmic, {{site.sitename}}, virtual, world, social network, free, community, avatar, chat, online, teen, roleplaying, join, social, groups, forums, safe, play, games, online, friends, teens, rare, rare meubi, collect, make, collect, contact, meubi, furniture, pets, furnish room, share, expression, badges, hangout, music, celebrity, VIP visits, celebs, mmo, mmorpgs, massive multiplayer, dox , dox hotel, dox hotel, space hotel, space hotel, space, sunnie, sunnie day, sunnieday, habbo, HABBO, habbo hotel, habboo, habbo city, habbocity, cool, virtual world, vip, retro, retro hotel, habbo retro, free , free habbo, holo">
+    <meta property="og:title" content="{{site.sitename}}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{site.domain}}">
+    <meta property="og:image" content="/assets/theme/default/images/summary-picture.png">
+    <meta property="og:description" content="Virtual world where you can make and meet friends.">
+    <meta property="og:site_name" content="{{site.sitename}}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+    <link rel="stylesheet" href="/assets/css/fonts.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/css/all.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/css/custom.css" type="text/css" />
+  </head>
+  <body class="h-100" id="LushLight">
+    <div id="app" class="h-100">
+      <div class="app h-100 d-flex flex-column text-white">
+        <div class="pageError h-100 w-100 text-center py-4">
+          <a href="{{ config('website_settings.site.domain') }}">
+            <button class="llbtn llbtn-danger llbtn-lg mb-3">
+              {{ lang('website.lost.go_back' )}}
+            </button>
+          </a>
+          <h5>{{ lang('website.lost.not_found' )}}</h5>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

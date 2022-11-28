@@ -67,6 +67,7 @@ class ResponseFactory implements ResponseFactoryInterface
         ]);
 
         $response->getBody()->write($html);
+
         return $response;
     }
 

@@ -1,0 +1,125 @@
+{% extends "base.twig" %} {% block body %}
+ <div class="bg-lush-content-bg d-flex flex-column h-100">
+   <div class="row py-4">
+     <div class="col-lg-3">
+       <div class="news-featured-card card hasBody mb-15p">
+         <div class="b-overlay-wrap position-relative">
+           <div class="news-featured text-left mb-0 p-3" style="background-image: url({{data.article.header}});">
+             <h5>{{data.article.title}}</h5>
+             <div>{{data.article.short_story}}</div>
+           </div>
+           <div class="d-flex flex-column p-2">
+             <article class="text-muted small">
+               {{data.article.full_story|raw}}
+             </article>
+             <div class="text-lush-info-text">
+               <hr class="my-1">
+               <div class="d-flex flex-row text-small justify-content-between small">
+                 <span class="d-flex flex-row">
+                   <img src="/assets/images/icons/user.png" class="pr-1">
+                   <div class="align-self-center">
+                     <a href="/home/{{data.article.author.username}}" class="">
+                       {{data.article.author.username}}
+                     </a> - {{data.article.timestamp|time_diff}} - 
+                        <a href="/news/cat/{{data.article.category.id}}-{{data.article.category.slug}}">{{data.article.category.category}}</a>
+                   </div>
+                 </span>
+                 <span class="d-flex flex-row">
+                   <img src="/assets/images/icons/motto.gif" class="pr-1">
+                   <span class="align-self-center">{{ data.article.posts|length }}</span>
+                 </span>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+       <div class="card mb-15p">
+         <div class="card-header">{{ lang('website.article.comments' )}}</div>
+         <div class="px-2 pt-2">
+           <div class="d-flex flex-row mb-15p">
+             <div class="form-group w-100 mb-0 mr-15p">
+               <input type="text" id="reply-message" placeholder="{{ lang('article.comments_fill') }}" maxlength="250" class="form-control w-100 h-100">
+             </div>
+             <div class="form-group mb-0">
+               <button class="llbtn llbtn-success h-100 article-reply" data-csrf="{{csrf_token}}" data-id="{{data.article.id}}"> {{ lang('article.comments_post') }} </button>
+             </div>
+           </div>
+           {% if data.article.posts is empty %}
+           <div class="alert alert-danger mb-15p">
+            {{ lang('article.comments_empty') }}
+          </div>
+           {% endif %}
+           {% for post in data.article.posts %}
+            {% if post.hidden != 1 or 'housekeeping_moderation_tools' in permissions %}
+             <span>
+             <div class="d-flex flex-row mb-15p w-100 list-item-animated">
+               <div class="card avatar-card mr-15p" style="background-image: url(/assets/images/avatar_backgrounds/{{post.author.avatar_bg}}.gif);">
+                 <div class="habboImage" id="avatar-Habbina">
+                   <img src="{{  config('website_settings.site.fpath') }}?figure={{post.author.look}}">
+                 </div>
+               </div>
+               <div class="card bg-white w-100">
+                 <div class="p-1 h-100 d-flex flex-column">
+                   <div class="d-flex flex-row justify-content-between">
+                     <span class="d-block w-100 mr-15p">
+                       {{post.message|raw}}
+                     </span>
+                   </div>
+                   <div class="mt-auto">
+                     <hr class="my-1">
+                     <div class="d-flex flex-row justify-content-between">
+                       <span class="text-muted small align-self-center d-flex">
+                         <img src="/assets/images/icons/user.png" class="pr-1 align-self-center">
+                         <a href="/home/{{post.author.username}}" class="text-primary align-self-center">
+                           {{post.author.username}}
+                         </a>
+                       </span>
+                       <span class="text-muted small d-flex flex-row">
+                         <img src="/assets/images/icons/time.gif" class="pr-1 align-self-center">
+                         <span class="align-self-center">{{post.timestamp|date("m/d/Y")}}</span>
+                       </span>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </span> 
+           {% endif %}
+         {% endfor %}
+         </div>
+       </div>
+     </div>
+     <div class="col-lg-1">
+       <div class="card mb-15p">
+         <div class="card-header orange">{{ lang('website.article.news' )}}</div>
+         <div class="d-none d-flex flex-column p-2">
+            {% for item in data.latestNews %}
+            {% set datediff = date().diff(date(item.timestamp)).days %}
+            {% if datediff > 365 %}
+            <b class="text-muted small">{{ (datediff/365)|round(0, 'floor') }} {{ lang('website.article.years') }}</b>
+            {% elseif datediff >= 30 %}
+            <b class="text-muted small">{{ (datediff/30)|round(0, 'floor') }} {{ lang('website.article.months') }}</b>
+            {% elseif datediff >= 7 %}
+            <b class="text-muted small">{{ (datediff/7)|round(0, 'floor') }} {{ lang('website.article.weeks') }}</b>
+            {% elseif datediff > 1 %}
+            <b class="text-muted small">{{ (datediff) }} {{ lang('website.article.days') }}</b>
+            {% elseif datediff %}
+            <b class="text-muted small">{{ lang('website.article.yesterday') }}</b>
+            {% else %}
+            <b class="text-muted small">{{ lang('website.article.today') }}</b>
+            {% endif %}
+            <hr class="my-1 mx-0">
+            <div class="px-3 pb-2">
+              {% set url = category == true ? '/news/cat/' ~ item.category ~ '/article/' ~ item.id ~ '-' ~ item.slug : '/article/' ~ item.id ~ '-' ~ item.slug  %}
+              <a href="{{ url }}" class="text-orange small d-block pb-1 {% if item.id == data.article.id %}text-orange small d-block pb-1 router-link-exact-active router-link-active text-muted small{% endif %}"  {% if item.id == data.article.id %}style="color: #6c757d !important;"{% endif %}>
+                {{item.title}}
+                <span>»</span>
+              </a>
+            </div>
+          {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

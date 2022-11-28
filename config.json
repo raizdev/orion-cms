@@ -1,3 +1,31 @@
 {
-
+    "website_settings": {
+        "name": "Cosmic",
+        "site": {
+            "domain": "https://cosmic.habbo.ng",
+            "fpath": "https://cdn.leet.ws/imaging/avatarimage"
+        },
+        "recaptcha": {
+            "publickey": null,
+            "secretkey": null
+        },
+        "paypal": {
+            "clientId": "AX27fw7Fq8zSb1y48CRFbDL90-0nSEbll12BmP6yyIDQeqe-BypdczUlZKCUFEq3HVXdkrKLkyscD3Zb",
+            "secretId": "EBRv7VoO7-tztK5AjYSEAtoPVy0c-QISQ3mxDWkgy3p6fr6fUdFH7z2ccWpwTxm0sgR-Y6zzFg-XAuSi",
+            "currencySymbol": "$",
+            "currency": "USD",
+            "sandbox": false
+        },
+        "language": "en",
+        "secretToken": "COSMIC-MH45TP8KJV0",
+        "debug": true
+    },
+    "hotel_settings": {
+        "nitro": "https://client.habbo.ng",
+        "radio": {
+            "stream": "https://21253.live.streamtheworld.com/WEB13_AAC.aac",
+            "timeout": "10000"
+        },
+        "motto": "Welcome to Cosmic-Rewind"
+    }
 }

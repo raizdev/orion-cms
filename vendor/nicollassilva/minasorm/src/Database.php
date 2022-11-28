@@ -97,7 +97,7 @@ class Database {
             );
 
         self::$builderInstance = $builder;
-            
+
         return $builder;
     }
 

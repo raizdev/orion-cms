@@ -1,0 +1,222 @@
+{% extends "permissions.twig" %}{% set set_permission = 'homepage' %}{% block base %}{% if not ajaxRequest %}
+<!DOCTYPE html>
+<html class="h-100">
+  <head>
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{title}} - {{ config('website_settings.name') }}</title>
+    <meta name="description"
+     content="Virtual world for young people where you can make and meet friends. Meet and make friends, chat with others, create your own avatar, design your own room for free and much more ...">
+    <meta name="keywords"
+     content="cosmic, {{ config('website_settings.name') }}, virtual, world, social network, free, community, avatar, chat, online, teen, roleplaying, join, social, groups, forums, safe, play, games, online, friends, teens, rare, rare meubi, collect, make, collect, contact, meubi, furniture, pets, furnish room, share, expression, badges, hangout, music, celebrity, VIP visits, celebs, mmo, mmorpgs, massive multiplayer, dox , dox hotel, dox hotel, space hotel, space hotel, space, sunnie, sunnie day, sunnieday, habbo, HABBO, habbo hotel, habboo, habbo city, habbocity, cool, virtual world, vip, retro, retro hotel, habbo retro, free , free habbo, holo">
+    <meta property="og:title" content="{{ config('website_settings.name') }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{site.domain}}">
+    <meta property="og:image" content="/assets/theme/default/images/summary-picture.png">
+    <meta property="og:description" content="Virtual world where you can make and meet friends.">
+    <meta property="og:site_name" content="{{ config('website_settings.name') }}">
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+    <link rel="stylesheet" href="/assets/css/fonts.css" type="text/css" />
+    <link rel="stylesheet" href="/assets/css/all.css?v=1" type="text/css" />
+    <link rel="stylesheet" href="/assets/css/custom.css?b=5" type="text/css" />
+    <link rel="stylesheet" href="/assets/css/animate.css" type="text/css" />
+    <script src="/assets/javascript/jquery-3.6.0.min.js"></script>
+    <script src="/assets/javascript/jquery.ui.touch-punch.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  </head>
+  <body class="h-100" id="LushLight">
+    <div id="app" class="h-100">
+      <div id="notification" class="notifications-container"></div>
+      <div class="app h-100 d-flex flex-column">
+        <nav class="navbar p-0 navbar-dark bg-lush-info navbar-expand-lg">
+          <div class="container">
+            <div class="row mx-0 w-100">
+              <div class="col d-flex flex-column flex-lg-row">
+                <div class="navbar-brand my-2 mt-3 py-0 pb-1">
+                  <button class="btn btn-link p-0 m-0 border-0">
+                    <img src="https://habbofont.net/font/hc_compact/{{ config('website_settings.name') }}.gif">
+                  </button>
+                </div>
+                {% if player %}
+                <button type="button" class="navbar-toggler align-self-end position-absolute mt-2 collapsed" data-bs-toggle="collapse" data-bs-target="#nav-collapse" aria-controls="nav-collapse" aria-expanded="false" aria-label="Toggle navigation" style="overflow-anchor: none;">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div id="nav-collapse" class="h-auto h-md-100 navbar-collapse collapse navigation-container collapse">
+                  <ul class="navbar-nav h-auto h-md-100 align-items-center">
+                    <li class="nav-item b-nav-dropdown dropdown {% if "home" in page %}selected {% endif %}" data-category="home">
+                      <a class="nav-link dropdown-toggle" id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span>{{ lang('base.nav_home') }}</span>
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+                        <li>
+                          <a class="dropdown-item" href="/home">{{ lang('base.nav_home') }}</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="/home/{{player.username}}">{{ lang('base.nav_my_page') }}</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="/settings/password">{{ lang('base.nav_account_settings') }}</a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                  <ul class="navbar-nav h-auto h-md-100 align-items-center">
+                    <li class="nav-item b-nav-dropdown dropdown {% if "community" in page %}selected {% endif %}" data-category="community">
+                      <a class="nav-link dropdown-toggle" id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span>{{ lang('base.nav_community') }}</span>
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+                        <li>
+                          <a class="dropdown-item" href="/community">{{ lang('base.nav_community') }}</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="/community/ranking">{{ lang('base.nav_ranking') }}</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="/community/competitions">{{ lang('base.nav_competitions') }}</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="/community/staff">{{ lang('base.nav_staff') }}</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="/community/jobs">{{ lang('base.nav_jobs') }}</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="/community/rules">{{ lang('base.nav_rules') }}</a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                  <ul class="navbar-nav h-auto h-md-100 align-items-center">
+                    <li class="nav-item b-nav-dropdown dropdown {% if "home" in page %}selected {% endif %}" data-category="article">
+                      <a class="nav-link dropdown-toggle" id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span>{{ lang('base.nav_news') }}</span>
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+                        {% for news in newsCategories %}
+                        <li>
+                          <a class="dropdown-item" href="/news/cat/{{news.id}}-{{news.slug}}">{{news.category}}</a>
+                        </li>
+                        {% endfor %}
+                      </ul>
+                    </li>
+                    <li class="nav-item">
+                      <a href="/shop" class="nav-link">{{ lang('base.nav_shop') }}</a>
+                    </li>
+                  </ul>
+                  <ul class="navbar-nav ml-auto">
+                    {% if 'housekeeping' in permissions %}
+                    <button onclick="window.open('/housekeeping', '_blank')" class="llbtn llbtn-warning mb-2 mt-2 mt-md-0 mb-md-0 w-auto mr-1">
+                      <a style="text-decoration: none; color: #fff">{{ lang('base.nav_housekeeping') }}</a>
+                      <img src="/assets/images/icons/housekeeping.gif" class="ml-1" style="margin-top:-3px">
+                    </button> 
+                    {% endif %}
+                    <button onclick="location.href='/logout';" class="llbtn llbtn-danger mb-2 mt-2 mt-md-0 mb-md-0 w-auto ml-1">
+                      <a style="text-decoration: none; color: #fff">{{ lang('base.nav_logout') }}</a>
+                      <img src="/assets/images/icons/logout.png" class="ml-1">
+                    </button>
+                  </ul>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+        </nav> 
+        {% if player %}
+         <div class="ll-heading">
+          <div class="container h-100">
+            <div class="row justify-content-between py-3 mx-0 h-100">
+              <div class="d-flex flex-row col">
+                <div class="avatar-plate flex-shrink-0 mr-2 d-flex flex-column justify-content-end">
+                  <img src="{{ config('website_settings.site.fpath') }}?figure={{player.look}}" data-look="{{player.look}}" class="align-self-center mb-4 pb-1 player-wave-home">
+                </div>
+                <div class="align-self-baseline d-none d-md-block">
+                  <div class="text-white pb-1"> {{ lang('website.base.header_welcome') }}, <b> {{ player.username }} </b>
+                  </div>
+                  <div class="bg-off-white py-1 px-0 flex-shrink-0 motto-row text-left text-lush-info-text">
+                    <span class="pl-1 pr-1 mr-1 py-1 text-truncate d-flex flex-row w-100 align-items-center">
+                    <span class="icon"><img src="/assets/images/icons/motto.gif"></span>
+                      {{ player.motto }}
+                    </span>
+                    </div>
+                  <div class="bg-off-white py-1 px-0 flex-shrink-0 motto-row text-left text-lush-info-text mt-2">
+                    <span class="pl-1 pr-1 mr-1 py-1 d-flex flex-row w-100 align-items-center">
+                    <span class="icon"><img src="/assets/images/icons/clock.gif"></span>
+                    {{ player.last_login|time_diff }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="justify-content-end col col-md-1 h-100 d-flex">
+                <div class="align-self-center w-100">
+                  <div class="card mb-2 py-2 text-center text-lush-info-text flex-row justify-content-center small">
+                    <img src="/assets/images/icons/online_icon.png" class="mr-2 flex-grow-0 align-self-center">
+                    <span class="align-self-center">
+                      <span class="font-weight-bold online-users">{{online_count}}</span> {{ config('website_settings.name') }}'s online </span>
+                  </div>
+                  <a href="/hotel"><button class="llbtn llbtn-success llbtn-lg w-100 mb-2 mb-md-0 clientButton"> {{ lang('base.header_enter_hotel') }} {{ config('website_settings.name') }}</button></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> 
+        {% endif %}
+        <div class="container h-100 page-container {% if player %}container-sm-fluid d-flex flex-column{% endif %}" data-page="{% if page is empty %}lost{% else %}{{page}}{% endif %}"> 
+            {% block body %} {% endblock %}  
+        </div>
+        <div class="{% if player is not empty %}container{% endif %} {% if player %}container-sm-fluid d-flex flex-column{% endif %}"> 
+          <div class="bg-lush-dark-blue text-center py-4 text-white mt-auto">
+              <img src="https://habbofont.net/font/hc_compact/{{ config('website_settings.name') }}.gif">
+              <small class="w-100 d-block pb-1 text-white">
+                <p>{{ lang('base.footer') }}</p>
+              </small>
+          </div>
+        </div>
+    </div>
+    <div class="llbtn llbtn-primary scroll-top-btn hidden">
+      <i class="fas fa-arrow-up"></i>
+    </div>
+    {% if player %}
+    <div id="hotel-container">
+        <div class="client-buttons">
+            <button class="client-close llbtn llbtn-danger">
+                <i style="margin-top:2px;margin-left:3px;" class="client-icon fa fa-arrow-left" aria-hidden="true"></i>
+                <span class="client-close-expand"><span>Web</span></span>
+            </button>
+            <button class="client-fullscreen llbtn llbtn-primary llbtn-lg">
+                <i class="client-icon fa fa-expand"></i>
+            </button>
+            <button class="client-radio llbtn llbtn-warning llbtn-lg">
+                <audio controls id="stream" style="display:none">
+                    <source type="audio/mpeg">
+                </audio>
+                <i class="fa fa-play"></i>
+                <i class="fa fa-pause" style="display: none"></i>
+                <i class="fa fa-volume-down"></i>
+                <i class="fa fa-volume-up"></i>
+            </button>
+        </div>
+    </div>
+    {% endif %}
+    <script src="/assets/javascript/jquery.history.js"></script>
+    <script src="/assets/javascript/jquery.fullscreen.min.js"></script>
+    <script src="/assets/javascript/functions.js"></script>
+    <script src="/assets/javascript/loading.js?v={{cache_timestamp}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id={{ config('website_settings.paypal.clientId') }}&currency={{ config('website_settings.paypal.currency') }}&disable-funding=credit,card"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <script>
+      $(function() {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+    </script>
+  </body>
+</html>
+{% else %}
+{% set page = page %}
+{% set array = [ {'data': block('body'), 'page':  page, 'title':  title}] %}
+{{array|json_encode()}}
+{% endif %}
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "base.twig" %} 
+{% block body %}
+<div class="bg-lush-content-bg d-flex flex-column h-100">
+   {% include "Profile/modal.twig" %}
+   <div>
+      {% if player.username == data.player.username %}
+      <div class="row mx-0 mb-2 pt-2">
+         <div class="col-4 d-flex flex-row justify-content-between">
+            {% if data.type != "edit" %}
+              {% if not data.mobile %}
+              <button class="llbtn llbtn-success llbtn-sm editProfile">{{ lang('website.profile.edit_profile' )}}</button> 
+              {% endif %}
+           
+              <div class="editActive" {% if data.type != "edit" %}style="display: none" {% endif %}>
+                  <button class="llbtn llbtn-success llbtn-sm saveProfile">{{ lang('website.profile.save_profile' )}}</button> 
+                  <button class="llbtn llbtn-dark llbtn-sm openInventory">{{ lang('website.profile.store' )}}</button>  
+              </div>
+
+           {% endif %}
+         </div>
+      </div>
+      {% endif %}
+      <div  class="containment position-relative page-content" 
+            style="background-image: url({% if data.player.background.name %}/assets/images/profile_backgrounds/{{data.player.background.data}}{% endif %}); min-height: 1160px;"
+            data-background="{{data.player.background.id}}"
+         >
+         <div>
+            {% if data.mobile %}
+            <h5 class="text-white text-center pt-2">
+                {{ lang('website.profile.only_desktop' )}}
+            </h5>
+            {% else %}
+            <div class="widgets">
+                {% for widget in data.player.widgets %} 
+                    {% include "Profile/widgets.twig" %}
+                {% endfor %}
+            </div>
+            <div class="stickers">
+                {% for sticker in data.player.widgets %}
+                    {% if sticker.type == "s" %}
+                        {% include "Profile/stickers.twig" %}
+                    {% endif %}
+                {% endfor %}
+           </div>
+            {% endif %}
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock %}

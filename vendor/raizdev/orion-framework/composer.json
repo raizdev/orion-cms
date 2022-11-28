@@ -1,0 +1,21 @@
+{
+    "name": "raizdev/orion-framework",
+    "description": "Orion Framework",
+    "require": {
+        "sunrise/http-router": "^2.15",
+        "doctrine/annotations": "^1.13",
+        "sunrise/http-message": "^2.1",
+        "sunrise/http-server-request": "^2.2",
+        "twig/twig": "^3.4",
+        "raizdev/phlak": "^1.0",
+        "httpsoft/http-response": "^1.0",
+        "nicollassilva/minasorm": "^0.19.0",
+        "symfony/dotenv": "^6.1",
+        "rakit/validation": "^1.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Orion\\Framework\\": "src/"
+        }
+    }
+}

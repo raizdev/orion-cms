@@ -1,0 +1,27 @@
+<img id="{{widget.id}}-edit" data-id="{{widget.id}}" class="icon-edit editActive" src="/assets/images/homestickers/icon_edit.gif" style="display: none">
+<div class="edit-menu" id="{{widget.id}}-menu" style="display: none">
+   <b>Settings</b>
+   <select class="selectSkin" data-id="{{widget.id}}">
+      <option disabled selected>Choose</option>
+      <option value="default_skin">Default</option>
+      <option value="bubble_skin">Speech bubble</option>
+      <option value="metal_skin">Metal</option>
+      <option value="notepad_skin">Notepad</option>
+      <option value="note_skin">Sticky Note</option>
+      <option value="golden_skin">Golden</option>
+      <option value="hcm_skin">HC Machine</option>
+      <option value="guided_skin">Guided Skin</option>
+      <option value="lush_skin">Lush Skin</option>
+      <option value="catalogue_skin">Catalogue Skin</option>
+      <option value="moodlight_skin">Moodlight Skin</option>
+      <option value="v15_skin">V15 Skin</option>
+      <option value="chain_skin">Chain Skin</option>
+      <option value="trax_skin">Trax Skin</option>
+   </select>
+   {% if note %}
+      <textarea rows="5" cols="23" id="data" autofocus>{{widget.data}}</textarea>
+      <div class="btn btn-sm btn-secondary w-100 removal-button deleteElement" data-type="{{widget.type}}" data-id="{{widget.id}}">
+        Remove
+      </div>
+   {% endif %}
+</div>

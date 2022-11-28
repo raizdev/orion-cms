@@ -4,14 +4,14 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit4e84f6be9af55e082e117cecb26a26b8
+class ComposerStaticInit255651bba9e62d94716d42aeb53f3b19
 {
     public static $files = array (
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        'e90b514f516f456feec46b4f674e0f58' => __DIR__ . '/..' . '/sunrise/http-message/constants/REASON_PHRASES.php',
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
-        'e90b514f516f456feec46b4f674e0f58' => __DIR__ . '/..' . '/sunrise/http-message/constants/REASON_PHRASES.php',
         '605213cb80017b049ca36e92cadcf453' => __DIR__ . '/..' . '/sunrise/http-router/functions/emit.php',
         'aee521aa0a551f1df3aa549f94095f19' => __DIR__ . '/..' . '/sunrise/http-router/functions/path_build.php',
         'fae457a730d0637e496a1f7cc3d00dfc' => __DIR__ . '/..' . '/sunrise/http-router/functions/path_match.php',
@@ -36,7 +36,6 @@ class ComposerStaticInit4e84f6be9af55e082e117cecb26a26b8
         'T' => 
         array (
             'Twig\\' => 5,
-            'Tests\\' => 6,
         ),
         'S' => 
         array (
@@ -54,7 +53,7 @@ class ComposerStaticInit4e84f6be9af55e082e117cecb26a26b8
         ),
         'R' => 
         array (
-            'ReallySimpleJWT\\' => 16,
+            'Rakit\\Validation\\' => 17,
         ),
         'P' => 
         array (
@@ -64,26 +63,21 @@ class ComposerStaticInit4e84f6be9af55e082e117cecb26a26b8
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
             'Psr\\Cache\\' => 10,
-            'PsrJwt\\' => 7,
             'PhpOption\\' => 10,
             'PHLAK\\Config\\' => 13,
         ),
-        'N' => 
+        'O' => 
         array (
-            'Nyholm\\Psr7\\' => 12,
+            'Orion\\Framework\\' => 16,
+            'Orion\\' => 6,
         ),
         'M' => 
         array (
             'Monolog\\' => 8,
             'MinasORM\\' => 9,
         ),
-        'K' => 
-        array (
-            'KPN\\' => 4,
-        ),
         'H' => 
         array (
-            'Http\\Message\\' => 13,
             'HttpSoft\\Response\\' => 18,
             'HttpSoft\\Message\\' => 17,
         ),
@@ -119,10 +113,6 @@ class ComposerStaticInit4e84f6be9af55e082e117cecb26a26b8
         'Twig\\' => 
         array (
             0 => __DIR__ . '/..' . '/twig/twig/src',
-        ),
-        'Tests\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/rbdwllr/psr-jwt/tests',
         ),
         'Symfony\\Polyfill\\Php80\\' => 
         array (
@@ -168,9 +158,9 @@ class ComposerStaticInit4e84f6be9af55e082e117cecb26a26b8
         array (
             0 => __DIR__ . '/..' . '/sunrise/http-header/src',
         ),
-        'ReallySimpleJWT\\' => 
+        'Rakit\\Validation\\' => 
         array (
-            0 => __DIR__ . '/..' . '/rbdwllr/reallysimplejwt/src',
+            0 => __DIR__ . '/..' . '/rakit/validation/src',
         ),
         'Psr\\SimpleCache\\' => 
         array (
@@ -187,8 +177,8 @@ class ComposerStaticInit4e84f6be9af55e082e117cecb26a26b8
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
         ),
         'Psr\\Container\\' => 
         array (
@@ -198,10 +188,6 @@ class ComposerStaticInit4e84f6be9af55e082e117cecb26a26b8
         array (
             0 => __DIR__ . '/..' . '/psr/cache/src',
         ),
-        'PsrJwt\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/rbdwllr/psr-jwt/src',
-        ),
         'PhpOption\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
@@ -210,9 +196,13 @@ class ComposerStaticInit4e84f6be9af55e082e117cecb26a26b8
         array (
             0 => __DIR__ . '/..' . '/raizdev/phlak/src',
         ),
-        'Nyholm\\Psr7\\' => 
+        'Orion\\Framework\\' => 
         array (
-            0 => __DIR__ . '/..' . '/nyholm/psr7/src',
+            0 => __DIR__ . '/..' . '/raizdev/orion-framework/src',
+        ),
+        'Orion\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
         ),
         'Monolog\\' => 
         array (
@@ -221,14 +211,6 @@ class ComposerStaticInit4e84f6be9af55e082e117cecb26a26b8
         'MinasORM\\' => 
         array (
             0 => __DIR__ . '/..' . '/nicollassilva/minasorm/src',
-        ),
-        'KPN\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src',
-        ),
-        'Http\\Message\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/php-http/message-factory/src',
         ),
         'HttpSoft\\Response\\' => 
         array (
@@ -276,9 +258,9 @@ class ComposerStaticInit4e84f6be9af55e082e117cecb26a26b8
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit4e84f6be9af55e082e117cecb26a26b8::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit4e84f6be9af55e082e117cecb26a26b8::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit4e84f6be9af55e082e117cecb26a26b8::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit255651bba9e62d94716d42aeb53f3b19::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit255651bba9e62d94716d42aeb53f3b19::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit255651bba9e62d94716d42aeb53f3b19::$classMap;
 
         }, null, ClassLoader::class);
     }

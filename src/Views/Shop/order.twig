@@ -1,0 +1,44 @@
+{% extends "base.twig" %} {% block body %} <div class="bg-lush-content-bg d-flex flex-column h-100">
+  <div class="row py-4">
+    {% include 'Shop/navigation.twig' %}
+    <div class="col-md-3">
+      <div class="card mb-15p">
+        <div class="card-header darkRed">{{ data.offer.title|capitalize }}</div>
+        <div class="p-2">
+          <div div class="payment-accept payment-status text-muted" style="padding-left: 10px;display:none">
+              {{ lang('website.shop.payment_accept') }} <br /><br />
+              <img src="/assets/images/shop/credits-success.png">
+          </div>
+          <div class="payment-decline payment-status text-muted" style="padding-left: 10px;display:none">
+              {{ lang('website.shop.payment_decline') }} <br /><br />
+              <img src="/assets/images/shop/credits-error.png">
+          </div>
+
+          <div class="payment-loader" style="display: none; text-align: center;">
+              <img src="/assets/images/shop/loading.gif">
+          </div>
+          <small class="text-muted">
+            <div class="order-description">
+                {{ data.offer.description|raw }}
+            </div>
+            <hr>
+              <div class="col col-lg-2 align-self-center p-2 mb-0">
+                  <div class="form-group">
+                      <label>{{ lang('website.shop.enter_username') }}</label>
+                      <input type="text" placeholder="{{ player.username }}" name="username" maxlength="16" class="form-control">
+                  </div>
+                  <div class="form-group">
+              <label>{{ lang('website.shop.payment') }}</label>
+               <input type="text" name="amount" class="form-control" value="{{ data.offer.title|capitalize }} - {{ config('website_settings.paypal.currencySymbol') }}{{data.offer.price}} {{ config('website_settings.paypal.currency') }}" disabled>
+                  </div>
+              </div>
+              {{ lang('website.shop.payment_info')|raw }}
+              <hr>
+              <div id="paypal-container"></div>
+              <input type="submit" value="{{ lang('website.shop.purchase') }}" class="llbtn llbtn-success purchase-item" data-id="{{ data.offer.id }}">
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> {% endblock %}

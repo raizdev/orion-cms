@@ -1,7 +1,21 @@
 <?php
 use PHLAK\Config\Config;
-use KPN\Core\Interfaces\CustomResponseInterface;
-use KPN\Core\Model\CustomResponse;
+use Orion\Framework\Interfaces\CustomResponseInterface;
+use Orion\Framework\Model\CustomResponse;
+
+if (!function_exists('__')) {
+    /**
+     * Takes message and placeholder to translate them to global locale.
+     *
+     * @param string $key
+     * @param array $placeholder
+     * @return string
+     */
+    function __(string $key, array $placeholder = []): string {
+        $locale = new \KPN\Core\Model\Locale();
+        return $locale->translate($key, $placeholder);
+    }
+}
 
 if (!function_exists('response')) {
     /**

@@ -1,0 +1,123 @@
+{% if widget.cat.data == 'myhabbo' %}
+{% set title = "My Profile" %}
+{% set body %}
+<div class="body">
+   <div class="user-widget">
+      <div class="userfirst">
+         <div class="username mb-1">{{ data.player.username }}</div>
+         <img src="/assets/images/hotel/{% if player.online %}offline{% else %}offline{% endif %}.gif" class="mb-1"> 
+         <div class="usermottobox"><span>{{locale.since}}:</span> <b>{{data.player.account_created|date("d-m-Y")}}</b></div>
+          {% if data.player.badges[0].badge_code %}<img src="{{ config('hotel_settings.nitro') }}/assets/images/c_images/album1584/{{ data.player.badges[0].badge_code }}.gif">{% endif %}
+      </div>
+      <div class="d-block"><img src="{{  config('website_settings.site.fpath') }}?figure={{ data.player.look }}&amp;direction=4" class="align-self-start"></div>
+      <div class="usermotto mb-1 mt-2">{{ data.player.motto }}</div>
+      <div class="user-tags">
+         <div class="alert alert-dark mb-0 pl-1 pr-1 pt-1 mb-1 pb-1"><span>No tags.</span></div>
+         {% if player.username == data.player.username %}
+         <div>
+            <form>
+               <div class="form-group mb-1"><input type="text" class="form-control form-control-sm"></div>
+               <div class="form-group mb-1">
+                  <button type="submit" disabled="disabled" class="llbtn llbtn-light llbtn-sm disabled">
+                  Add Tag
+                  </button>
+               </div>
+            </form>
+         </div>
+         {% endif %}
+      </div>
+   </div>
+</div>
+{% endset %}
+{% endif %}
+{% if widget.cat.data == 'myyoutube' %}
+{% set title = "Youtube" %}
+{% set body %}
+<div class="body">
+  <div class="youtube-video">
+        <iframe src="https://www.youtube.com/embed/{{widget.data}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe>
+  </div>
+</div>
+{% endset %}
+{% endif %}
+{% if widget.cat.data == 'myfriends' %}
+{% set title = "My Friends" %}
+{% set body %}
+<div class="body">
+   <div class="d-flex flex-row mb-1"></div>
+   <div class="friend-list">
+      <div class="friend-grid">
+         {% for row in data.player.friends|slice(0,5) %}
+         <div class="friend-grid-item">
+            <figure class="flex-shrink-0 m-0" style="background-image: url({{ config('website_settings.site.fpath')}}?figure={{row.look}}&amp;headonly=1&quot;);"></figure>
+            <div class="text-truncate"><span>{{row.username}}</span> <small class="d-block">18-10-2022</small></div>
+         </div>
+         {% endfor %}
+      </div>
+   </div>
+</div>
+{% endset %}
+{% endif %}
+{% if widget.cat.data == 'mybadges' %}
+{% set title = "My Badges" %}
+{% set body %}
+<div class="body d-flex flex-column justify-content-center">
+   <div>
+      <div class="badge-grid">
+        {% for badge in data.player.badges %}
+         <div class="widget-badge" style="background-image: url({{site.cpath}}/c_images/album1584/{{badge.badge_code}}.gif);"></div>
+         {% endfor %}
+      </div>
+   </div>
+</div>
+{% endset %}
+{% endif %}
+{% if widget.cat.data == 'myrooms' %}
+{% set title = "My Rooms" %}
+{% set body %}
+<div class="body">
+   {% if data.player.rooms %}
+   {% for row in data.player.rooms %}
+   <div class="room_content">
+      <div class="room {{row.state}}">
+         <p class="room_title">{{row.name}}</p>
+         <a href="#">Enter Room</a>
+      </div>
+   </div>
+   {% endfor %}
+   {% else %}
+      You don't created any room yet!!
+   {% endif %}
+</div>
+{% endset %}
+{% endif %}
+{% if widget.type != "s" %}
+<div 
+   class="homes-widget position-absolute widget_{{widget.skin}} {{widget.cat.data}} widget"
+   style="left: {{widget.x}}px; top: {{widget.y}}px; z-index: {{widget.z}}; {% if widget.hide %}display: none{% endif %}"
+   data-zIndex="{{widget.z}}"
+   data-id="{{widget.name}}" 
+   data-ids="{{widget.id}}" 
+   data-type="{{widget.type}}" 
+   data-skin="{{widget.skin}}" 
+   data-top="{{widget.y}}" 
+   data-left="{{widget.x}}"
+   >
+   <div class="heading">
+      <span>
+      {% if widget.cat.data != "note" %}
+      {{ title }}
+      {% endif %}
+      </span>
+   </div>
+   {% if widget.cat.data == "note" %}{% include "Profile/edit.twig" with {note:true, widget: widget} only  %}{% endif %}
+   {% if widget.cat.data != "note" %}{% include "Profile/edit.twig" %}{% endif %}
+   {% if widget.cat.data != "note" %}
+   {{ body }}
+   {% else %}
+   <div class="body">
+      {{ widget.data }}
+   </div>
+   {% endif %}
+</div>
+{% endif %}

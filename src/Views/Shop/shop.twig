@@ -1,0 +1,21 @@
+{% extends "base.twig" %} {% block body %} <div class="bg-lush-content-bg d-flex flex-column h-100">
+  <div class="row py-4">
+    {% include 'Shop/navigation.twig' %}
+    <div class="col-md-3">
+      <div>
+        <div class="card mb-15p" selected="selected">
+          <div class="card-header blue">{{ lang('website.shop.about_the_shop') }}</div>
+          <div class="p-2">
+              {{ data.aboutTheShop|raw }}
+          </div>
+        </div>
+        <div class="card mb-15p" selected="selected">
+          <div class="card-header purple">{{ lang('website.shop.terms_and_conditions') }}</div>
+          <div class="p-2">
+              {{ data.termsAndConditions|raw }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> {% endblock %}

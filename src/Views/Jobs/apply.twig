@@ -1,0 +1,87 @@
+{% extends "base.twig" %}
+
+{% block body %}
+<div class="bg-lush-content-bg d-flex flex-column h-100">
+    <div class="row py-4">
+      <div class="col-lg-3 pr-xl-0">
+        <div class="card mb-15p">
+          <div class="card-header">{{ lang('website.jobs.applying_for' )}}: {{job.job}}</div>
+          <div class="p-2">
+            <form action="jobs/apply/request" method="post" autocomplete="off">
+              <div class="row">
+                <div class="form-group col text-left">
+                  <label>{{ lang('website.jobs.username' )}}:</label>
+                  <input name="name" value="{{player.username}}" class="form-control" readonly>
+                  <small class="form-text text-muted">{{ lang('website.jobs.username_explanation' )}}</small>
+                </div>
+                <div class="form-group col text-left">
+                  <label>Discord Handle:</label>
+                  <input name="discord" placeholder="{{site.sitename}}#1337" required="required" class="form-control">
+                  <small class="form-text text-muted">{{ lang('website.jobs.discord_explanation' )}}</small>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group text-left col">
+                  <label>{{ lang('website.jobs.age' )}}:</label>
+                  <input name="age" min="13" max="40" type="number" required="required" class="form-control form-control-sm">
+                  <small class="form-text text-muted">{{ lang('website.jobs.age_explanation' )}}.</small>
+                </div>
+                <div class="form-group text-left col">
+                  <label>{{ lang('website.jobs.weekly' )}}:</label>
+                  <input value="1" name="weekly_hours" min="1" max="40" type="number" required="required" class="form-control form-control-sm">
+                  <small class="form-text text-muted">{{ lang('website.jobs.weekly_explanation' )}}</small>
+                </div>
+                <div class="form-group text-left col">
+                  <label>{{ lang('website.jobs.country' )}}:</label>
+                  <input name="country" required="required" class="form-control form-control-sm">
+                  <small class="form-text text-muted">{{ lang('website.jobs.country_explanation' )}}</small>
+                </div>
+              </div>
+              <div class="form-group text-left">
+                <label>{{ lang('website.jobs.why' )}}:</label>
+                <textarea name="why_us" rows="5" class="form-control"></textarea>
+                <small class="form-text text-muted">{{ lang('website.jobs.why_explanation' )}}</small>
+              </div>
+              <div class="form-group text-left">
+                <label>{{ lang('website.jobs.ideas' )}}:</label>
+                <textarea name="ideas" rows="3" class="form-control"></textarea>
+                <small class="form-text text-muted">{{ lang('website.jobs.ideas_explanation' )}}</small>
+              </div>
+              <div class="form-group mb-0 row">
+                <div class="col pl-0">
+                  <a href="/community/jobs">
+                    <button type="button" class="llbtn llbtn-danger w-100 col"> {{ lang('website.jobs.cancel' )}} </button>
+                  </a>
+                </div>
+                <div class="col pr-0">
+                  <input type="hidden" name="job_id" value="{{job.id}}">
+                  <input type="hidden" name="csrftoken" value="{{csrf_token}}">
+                  <button type="submit" class="llbtn llbtn-success w-100"> {{ lang('website.jobs.submit' )}} </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-1">
+        <div class="card mb-15p">
+          <div class="card-header darkGreen">{{ lang('website.jobs.the_job' )}}</div>
+          <div class="p-2 small text-muted">
+            <img src="/assets/images/placeholders/asset_staffbadge.gif" align="left">
+            <p> {{ lang('website.jobs.the_job_content1' )}} </p>
+            <p class="mb-0"> {{ lang('website.jobs.the_job_content2' )}} </p>
+          </div>
+        </div>
+        <div class="card mb-15p">
+          <div class="card-header darkRed">{{ lang('website.jobs.terms' )}}</div>
+          <div class="p-2 small text-muted">
+            <img src="/assets/images/placeholders/frank_15.png" align="right">
+            <p> {{ lang('website.jobs.terms_content1' )}} </p>
+            <p class="mb-0">{{ lang('website.jobs.terms_content2' )}}</p>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,264 @@
+{% extends "base.twig" %} {% block body %}
+<div class="bg-lush-content-bg d-flex flex-column h-100">
+  <div class="py-4">
+    <div class="mb-15p pt-15p">
+      <div class="row">
+        {% if data.credits is empty %}
+        <div class="leaderboard col-md-1 mb-15p">
+          <div class="card d-flex flex-column h-100 leaderboard-credits">
+            <div class="b-overlay-wrap position-relative h-100">
+              <div class="leader-heading d-flex flex-column justify-content-end">
+                <div class="podium">
+                </div>
+              </div>
+              <div class="b-overlay position-absolute" style="inset: 0px; z-index: 10;">
+                <div class="position-absolute bg-dark rounded-sm" style="inset: 0px; opacity: 0.85; backdrop-filter: blur(2px);"></div>
+                  <div class="position-absolute" style="top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%);">
+                    <b class="w-100 text-center d-block my-auto text-white">{{ lang('website.ranking.contestants_empty' )}}</b>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% else %}
+        <div class="leaderboard col-md-1 mb-15p">
+          <div class="card d-flex flex-column h-100 leaderboard-credits">
+            <div class="b-overlay-wrap position-relative h-100">
+              <div class="leader-heading d-flex flex-column justify-content-end">
+                <div class="podium"> 
+                  {% for credits in data.credits|slice(0, 3) %}
+                   <img src="{{  config('website_settings.site.fpath') }}?figure={{credits.player.look}}&head_direction=3" class="btn btn-link p-0">
+                  {% endfor %}
+                </div>
+              </div>
+              <div class="leader-sub small px-2 py-2">{{ lang('website.ranking.most_credits' )}}</div>
+              <ul class="list-group">
+                {% for credits in data.credits %}
+                 <li class="list-group-item d-flex flex-row">
+                  <div class="d-flex flex-row text-muted small px-2 py-2 justify-content-end w-100">
+                    <div class="d-flex flex-row">
+                      <span class="pr-1">#{{ loop.index }}</span>
+                      <span class="align-self-center">
+                        <a href="/home/{{credits.player.username}}">
+                          <span class="text-lush-info-text">{{credits.player.username}}</span>
+                        </a>
+                      </span>
+                    </div>
+                    <span class="align-self-end w-100 text-right">{{credits.credits}}</span>
+                  </div>
+                </li> 
+                {% endfor %}
+               </ul>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% if data.currencys is empty %}
+        {% for key,currency in data.currencys %}
+        <div class="leaderboard col-md-1 mb-15p">
+          <div class="card d-flex flex-column h-100 leaderboard-{{key}}">
+            <div class="b-overlay-wrap position-relative h-100">
+              <div class="leader-heading d-flex flex-column justify-content-end">
+                <div class="podium">
+                </div>
+              </div>
+              <div class="b-overlay position-absolute" style="inset: 0px; z-index: 10;">
+                <div class="position-absolute bg-dark rounded-sm" style="inset: 0px; opacity: 0.85; backdrop-filter: blur(2px);"></div>
+                  <div class="position-absolute" style="top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%);">
+                    <b class="w-100 text-center d-block my-auto text-white">{{ lang('website.ranking.contestants_empty' )}}</b>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+        {% else %}
+        {% for key,currency in data.currencys %}
+         <div class="leaderboard col-md-1 mb-15p">
+          <div class="card d-flex flex-column h-100 leaderboard-{{key}}">
+            <div class="b-overlay-wrap position-relative h-100">
+              <div class="leader-heading d-flex flex-column justify-content-end">
+                <div class="podium"> 
+                  {% for user in currency|slice(0, 3) %}
+                   <img src="{{  config('website_settings.site.fpath') }}?figure={{user.player.look}}&head_direction=3" class="btn btn-link p-0">
+                  {% endfor %}
+                </div>
+              </div>
+              <div class="leader-sub small px-2 py-2">{{ lang('website.ranking.most_' ~ key )}}</div>
+              <ul class="list-group">
+                {% for user in currency %}
+                <li class="list-group-item d-flex flex-row">
+                  <div class="d-flex flex-row text-muted small px-2 py-2 justify-content-end w-100">
+                    <div class="d-flex flex-row">
+                      <span class="pr-1">#{{ loop.index }}</span>
+                      <span class="align-self-center">
+                        <a href="/home/{{user.player.username}}">
+                          <span class="text-lush-info-text">{{user.player.username}}</span>
+                        </a>
+                      </span>
+                    </div>
+                    <span class="align-self-end w-100 text-right">{{user.amount}}</span>
+                  </div>
+                </li> 
+                {% endfor %}
+               </ul>
+            </div>
+          </div>
+        </div> 
+        {% endfor %}
+        {% endif %}
+        {% if data.achievements is empty %}
+        <div class="leaderboard col-md-1 mb-15p">
+          <div class="card d-flex flex-column h-100 leaderboard-score">
+            <div class="b-overlay-wrap position-relative h-100">
+              <div class="leader-heading d-flex flex-column justify-content-end">
+                <div class="podium">
+                </div>
+              </div>
+              <div class="b-overlay position-absolute" style="inset: 0px; z-index: 10;">
+                <div class="position-absolute bg-dark rounded-sm" style="inset: 0px; opacity: 0.85; backdrop-filter: blur(2px);"></div>
+                  <div class="position-absolute" style="top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%);">
+                    <b class="w-100 text-center d-block my-auto text-white">{{ lang('website.ranking.contestants_empty' )}}</b>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% else %}
+        <div class="leaderboard col-md-1 mb-15p">
+          <div class="card d-flex flex-column h-100 leaderboard-score">
+            <div class="b-overlay-wrap position-relative h-100">
+              <div class="leader-heading d-flex flex-column justify-content-end">
+                <div class="podium"> 
+                  {% for achievements in data.achievements|slice(0, 3) %}
+                    <img src="{{  config('website_settings.site.fpath') }}?figure={{achievements.player.look}}&head_direction=3" class="btn btn-link p-0">
+                  {% endfor %}
+                </div>
+              </div>
+              <div class="leader-sub small px-2 py-2">{{ lang('website.ranking.most_ap' )}}</div>
+              <ul class="list-group">
+                {% for achievements in data.achievements %}
+                <li class="list-group-item d-flex flex-row">
+                  <div class="d-flex flex-row text-muted small px-2 py-2 justify-content-end w-100">
+                    <div class="d-flex flex-row">
+                      <span class="pr-1">#{{ loop.index }}</span>
+                      <span class="align-self-center">
+                        <a href="/home/{{achievements.player.username}}">
+                          <span class="text-lush-info-text">{{achievements.player.username}}</span>
+                        </a>
+                      </span>
+                    </div>
+                    <span class="align-self-end w-100 text-right">{{achievements.achievement_score}}</span>
+                  </div>
+                </li> 
+                {% endfor %}
+               </ul>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% if data.respects is empty %}
+        <div class="leaderboard col-md-1 mb-15p">
+          <div class="card d-flex flex-column h-100 leaderboard-respect">
+            <div class="b-overlay-wrap position-relative h-100">
+              <div class="leader-heading d-flex flex-column justify-content-end">
+                <div class="podium">
+                </div>
+              </div>
+              <div class="b-overlay position-absolute" style="inset: 0px; z-index: 10;">
+                <div class="position-absolute bg-dark rounded-sm" style="inset: 0px; opacity: 0.85; backdrop-filter: blur(2px);"></div>
+                  <div class="position-absolute" style="top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%);">
+                    <b class="w-100 text-center d-block my-auto text-white">{{ lang('website.ranking.contestants_empty' )}}</b>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% else %}
+        <div class="leaderboard col-md-1 mb-15p">
+          <div class="card d-flex flex-column h-100 leaderboard-respect">
+            <div class="b-overlay-wrap position-relative h-100">
+              <div class="leader-heading d-flex flex-column justify-content-end">
+                <div class="podium"> 
+                {% for respects in data.respects|slice(0, 3) %}
+                  <img src="{{  config('website_settings.site.fpath') }}?figure={{respects.player.look}}&head_direction=3" class="btn btn-link p-0"> 
+                {% endfor %}
+                </div>
+              </div>
+              <div class="leader-sub small px-2 py-2">{{ lang('website.ranking.most_respect' )}}</div>
+              <ul class="list-group">
+                {% for respects in data.respects %}
+                <li class="list-group-item d-flex flex-row">
+                  <div class="d-flex flex-row text-muted small px-2 py-2 justify-content-end w-100">
+                    <div class="d-flex flex-row">
+                      <span class="pr-1">#{{ loop.index }}</span>
+                      <span class="align-self-center">
+                        <a href="/home/{{respects.player.username}}">
+                          <span class="text-lush-info-text">{{respects.player.username}}</span>
+                        </a>
+                      </span>
+                    </div>
+                    <span class="align-self-end w-100 text-right">{{respects.respects_received}}</span>
+                  </div>
+                </li> 
+                {% endfor %}
+               </ul>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% if data.respects is empty %}
+        <div class="leaderboard col-md-1 mb-15p">
+          <div class="card d-flex flex-column h-100 leaderboard-time">
+            <div class="b-overlay-wrap position-relative h-100">
+              <div class="leader-heading d-flex flex-column justify-content-end">
+                <div class="podium">
+                </div>
+              </div>
+              <div class="b-overlay position-absolute" style="inset: 0px; z-index: 10;">
+                <div class="position-absolute bg-dark rounded-sm" style="inset: 0px; opacity: 0.85; backdrop-filter: blur(2px);"></div>
+                  <div class="position-absolute" style="top: 50%; left: 50%; transform: translateX(-50%) translateY(-50%);">
+                    <b class="w-100 text-center d-block my-auto text-white">{{ lang('website.ranking.contestants_empty' )}}</b>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% else %}
+        <div class="leaderboard col-md-1 mb-15p">
+          <div class="card d-flex flex-column h-100 leaderboard-time">
+            <div class="b-overlay-wrap position-relative h-100">
+              <div class="leader-heading d-flex flex-column justify-content-end">
+                <div class="podium"> 
+                  {% for online in data.online|slice(0, 3) %}
+                   <img src="{{  config('website_settings.site.fpath') }}?figure={{online.player.look}}&head_direction=3" class="btn btn-link p-0"> 
+                  {% endfor %}
+                </div>
+              </div>
+              <div class="leader-sub small px-2 py-2">{{ lang('website.ranking.most_online' )}}</div>
+              <ul class="list-group">
+                {% for online in data.online  %}
+                <li class="list-group-item d-flex flex-row">
+                  <div class="d-flex flex-row text-muted small px-2 py-2 justify-content-end w-100">
+                    <div class="d-flex flex-row">
+                      <span class="pr-1">#{{ loop.index }}</span>
+                      <span class="align-self-center">
+                        <a href="/home/{{online.player.username}}">
+                          <span class="text-lush-info-text">{{online.player.username}}</span>
+                        </a>
+                      </span>
+                    </div>
+                    <span class="align-self-end w-100 text-right">{{ online.progress / 60|round }}h</span>
+                  </div>
+                </li> 
+                {% endfor %}
+               </ul>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
