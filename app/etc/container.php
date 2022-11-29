@@ -12,9 +12,7 @@ return (function () : Container {
 
     $builder->addDefinitions(
         // main definitions...
-        ...glob(__DIR__ . '/definitions/*.php'),
-        ...glob(__DIR__ . '/definitions/*.php.' . $env),
-        ...glob(__DIR__ . '/definitions/*.php.local'),
+        ...glob(__DIR__ . '/services/*.php')
     );
 
     if ('prod' === $env) {
