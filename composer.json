@@ -6,8 +6,11 @@
         "doctrine/annotations": "^1.13",
         "sunrise/http-message": "^2.1",
         "raizdev/phlak": "^1.0",
-        "raizdev/orion-framework": "^1.7",
-        "vlucas/phpdotenv": "^5.5"
+        "raizdev/orion-framework": "^1.9",
+        "vlucas/phpdotenv": "^5.5",
+        "odan/session": "^5.1",
+        "php-di/php-di": "^6.4",
+        "symfony/cache": "^6.1"
     },
     "autoload": {
         "psr-4": {

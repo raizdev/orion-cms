@@ -1,5 +1,5 @@
 <?php
-namespace Cosmic\App\Controllers\Index;
+namespace Orion\Controllers;
 
 use Orion\Framework\Controller\BaseController;
 use Sunrise\Http\Router\Annotation as Mapping;

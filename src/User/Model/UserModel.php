@@ -1,5 +1,5 @@
 <?php
-namespace Orion\Models;
+namespace Orion\User\Model;
 
 use Orion\Framework\Database\DatabaseModel;
 

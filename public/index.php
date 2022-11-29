@@ -1,34 +1,29 @@
 <?php
+session_start();
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-use Doctrine\Common\Annotations\AnnotationRegistry;
 use Sunrise\Http\ServerRequest\ServerRequestFactory;
-use Sunrise\Http\Router\Loader\DescriptorLoader;
-use Sunrise\Http\Router\Router;
-use Sunrise\Http\Router\Middleware\CallableMiddleware;
 use Sunrise\Http\Message\ResponseFactory;
-use Orion\Framework\Middleware\ErrorHandlingMiddleware;
+use Sunrise\Http\Router\RequestHandler\QueueableRequestHandler;
 
 use function Sunrise\Http\Router\emit;
 
 require __DIR__ . '/../vendor/autoload.php';
-require __DIR__ . '/../helper.php';
+require __DIR__ . '/../app/etc/helper.php';
 
-AnnotationRegistry::registerLoader('class_exists');
+$container = require __DIR__ . '/../app/etc/container.php';
 
-$loader = new DescriptorLoader();
+$router = $container->get('router');
+$middlewares = $container->get('middlewares');
 
-$loader->attach('../src/Controllers/');
-
-$router = new Router();
-$router->load($loader);
-
-$router->addMiddleware(new ErrorHandlingMiddleware());
+$handler = new QueueableRequestHandler($router);
+$handler->add(...$middlewares);
 
 $request = ServerRequestFactory::fromGlobals();
-$response = $router->run($request);
+$response = $handler->handle($request);
 
 emit($response);
 

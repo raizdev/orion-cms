@@ -2,6 +2,11 @@
 use PHLAK\Config\Config;
 use Orion\Framework\Interfaces\CustomResponseInterface;
 use Orion\Framework\Model\CustomResponse;
+use Orion\Framework\Service\SessionService;
+
+use Orion\Framework\Exception\AuthenticationException;
+use Orion\Framework\Interfaces\HttpResponseCodeInterface;
+use Orion\Models\User;
 
 if (!function_exists('__')) {
     /**
@@ -12,7 +17,7 @@ if (!function_exists('__')) {
      * @return string
      */
     function __(string $key, array $placeholder = []): string {
-        $locale = new \KPN\Core\Model\Locale();
+        $locale = new \Orion\Framework\Model\Locale();
         return $locale->translate($key, $placeholder);
     }
 }
@@ -36,7 +41,7 @@ if (!function_exists('app_dir')) {
      * @return string
      */
     function app_dir(): string {
-        return __DIR__ . '/';
+        return __DIR__ . '/../../';
     }
 }
 
@@ -49,7 +54,7 @@ if (!function_exists('config')) {
      */
     
     function config($key = '') {
-        $config = new Config(__DIR__ . '/config.json');
+        $config = new Config(__DIR__ . '/../config/settings.json');
         return $config->get($key);
     }
 }
@@ -67,4 +72,28 @@ if (!function_exists('debug')) {
         exit;
     }
 }
-    
+if (!function_exists('user')) {
+
+    function user($user_id) {
+
+        $session = new SessionService();
+        if(!$session->exists('user') || !empty($user_id)) {
+            throw new AuthenticationException(
+                __('Not logged in.'),
+                200,
+                HttpResponseCodeInterface::HTTP_RESPONSE_UNAUTHORIZED
+            );
+        }
+
+        $user = User::find($user_id);
+        if(!$user) {
+            throw new AuthenticationException(
+                __('User doesnt exists.'),
+                200,
+                HttpResponseCodeInterface::HTTP_RESPONSE_UNAUTHORIZED
+            );
+        }
+
+        return $user;
+    }
+}
