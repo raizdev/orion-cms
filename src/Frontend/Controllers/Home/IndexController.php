@@ -10,10 +10,6 @@ use Odan\Session\SessionInterface;
 
 class Home extends BaseController {
 
-    public function __construct(
-        private SessionInterface $session
-    ) {}
-
     /**
      * @Route(
      *   name="index",
@@ -23,7 +19,6 @@ class Home extends BaseController {
      */
     public function index(Request $request) 
     {
-        debug($this->session);
         return $this->twig("home/home");
     }
 }
