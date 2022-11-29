@@ -6,8 +6,13 @@ use Sunrise\Http\Message\ResponseFactory;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 use Orion\Framework\Controller\BaseController;
+use Odan\Session\SessionInterface;
 
 class Home extends BaseController {
+
+    public function __construct(
+        private SessionInterface $session
+    ) {}
 
     /**
      * @Route(
@@ -18,6 +23,7 @@ class Home extends BaseController {
      */
     public function index(Request $request) 
     {
+        debug($this->session);
         return $this->twig("home/home");
     }
 }

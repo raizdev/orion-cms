@@ -6,9 +6,11 @@ use function DI\env;
 use function DI\string;
 
 use Orion\Framework\Middleware\ErrorHandlingMiddleware;
+use Odan\Session\SessionInterface;
+use Odan\Session\PhpSession;
 
 return [
     'middlewares' => [
-        autowire(ErrorHandlingMiddleware::class)
+        autowire(ErrorHandlingMiddleware::class),
     ],
 ];
