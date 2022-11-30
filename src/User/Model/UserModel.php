@@ -3,7 +3,7 @@ namespace Orion\User\Model;
 
 use Orion\Framework\Database\DatabaseModel;
 
-class User extends DatabaseModel {
+class UserModel extends DatabaseModel {
 
     protected $table = 'users';
 

@@ -2,6 +2,7 @@
 use PHLAK\Config\Config;
 use Orion\Framework\Interfaces\CustomResponseInterface;
 use Orion\Framework\Model\CustomResponse;
+use Orion\Framework\Model\Container;
 use Orion\Framework\Service\SessionService;
 
 use Orion\Framework\Exception\AuthenticationException;
@@ -72,6 +73,7 @@ if (!function_exists('debug')) {
         exit;
     }
 }
+
 if (!function_exists('user')) {
 
     function user($user_id) {

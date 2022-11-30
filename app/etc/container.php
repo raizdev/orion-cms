@@ -11,9 +11,12 @@ return (function () : Container {
     $builder->useAnnotations(true);
 
     $builder->addDefinitions(
-        // main definitions...
         ...glob(__DIR__ . '/services/*.php')
     );
+
+    $builder->addDefinitions([
+        'Twig_Environment' => \DI\get('twig')
+    ]);
 
     if ('prod' === $env) {
         $builder->enableCompilation(__DIR__ . '/../cache');
