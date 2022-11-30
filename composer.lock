@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b8c93408d14452f9df9f3242636c646c",
+    "content-hash": "17735ae22b3d5d6e56b22121d241785f",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1178,16 +1178,16 @@
         },
         {
             "name": "raizdev/orion-framework",
-            "version": "2.0",
+            "version": "2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/raizdev/orion-framework.git",
-                "reference": "36ddf09035073e0b9902b4643032dc09eac8ba74"
+                "reference": "768db1481db5d54199439414661ec06eb51a5863"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/raizdev/orion-framework/zipball/36ddf09035073e0b9902b4643032dc09eac8ba74",
-                "reference": "36ddf09035073e0b9902b4643032dc09eac8ba74",
+                "url": "https://api.github.com/repos/raizdev/orion-framework/zipball/768db1481db5d54199439414661ec06eb51a5863",
+                "reference": "768db1481db5d54199439414661ec06eb51a5863",
                 "shasum": ""
             },
             "require": {
@@ -1211,9 +1211,9 @@
             "description": "Orion Framework",
             "support": {
                 "issues": "https://github.com/raizdev/orion-framework/issues",
-                "source": "https://github.com/raizdev/orion-framework/tree/2.0"
+                "source": "https://github.com/raizdev/orion-framework/tree/2.2"
             },
-            "time": "2022-11-29T00:33:51+00:00"
+            "time": "2022-11-30T00:34:43+00:00"
         },
         {
             "name": "raizdev/phlak",

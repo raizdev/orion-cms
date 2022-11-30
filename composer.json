@@ -6,7 +6,7 @@
         "doctrine/annotations": "^1.13",
         "sunrise/http-message": "^2.1",
         "raizdev/phlak": "^1.0",
-        "raizdev/orion-framework": "^2.0",
+        "raizdev/orion-framework": "^2.2",
         "vlucas/phpdotenv": "^5.5",
         "odan/session": "^5.1",
         "php-di/php-di": "^6.4",
