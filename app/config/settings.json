@@ -26,6 +26,9 @@
             "stream": "https://21253.live.streamtheworld.com/WEB13_AAC.aac",
             "timeout": "10000"
         },
-        "motto": "Welcome to Cosmic-Rewind"
+        "motto": "Welcome to Cosmic-Rewind",
+        "register": {
+            "max_accounts_per_ip": 3
+        }
     }
 }

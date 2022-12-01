@@ -508,9 +508,9 @@ function WebAjaxManagerInterface() {
 
 function WebNotificationsManagerInterface() {
     this.titles_configutation = {
-        success: Locale.web_notifications_success,
-        error: Locale.web_notifications_error,
-        info: Locale.web_notifications_info
+        success: 'Success',
+        error: 'Error',
+        info: 'Info'
     };
     this.notifications = {};
 

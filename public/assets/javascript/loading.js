@@ -42,7 +42,6 @@ function ConfigLoadingInterface ()
 function SiteLoadingInterface()
 {
     this.files = [
-        "web.locale",
         "web.pages",
         "web.core"
     ];

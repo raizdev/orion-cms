@@ -1,0 +1,2 @@
+[2022-12-02T00:15:28.555158+01:00] Orion.ERROR: SQLSTATE[HY000]: General error: 1364 Field 'ip_register' doesn't have a default value [] []
+[2022-12-02T00:16:36.801000+01:00] Orion.ERROR: SQLSTATE[HY000]: General error: 1364 Field 'ip_current' doesn't have a default value [] []

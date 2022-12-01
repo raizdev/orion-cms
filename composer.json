@@ -10,7 +10,8 @@
         "vlucas/phpdotenv": "^5.5",
         "odan/session": "^5.1",
         "php-di/php-di": "^6.4",
-        "symfony/cache": "^6.1"
+        "symfony/cache": "^6.1",
+        "monolog/monolog": "^3.2"
     },
     "autoload": {
         "psr-4": {

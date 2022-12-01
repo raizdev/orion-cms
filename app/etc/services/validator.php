@@ -7,7 +7,7 @@ use function DI\factory;
 
 return [
     ValidatorService::class => factory(function ($container) {
-        $config = $this->container->get(ConfigInterface::class);
+        $config = $container->get(ConfigInterface::class);
         return new Validator($config->get('validation'));
     })
 ];

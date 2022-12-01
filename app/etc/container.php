@@ -14,10 +14,6 @@ return (function () : Container {
         ...glob(__DIR__ . '/services/*.php')
     );
 
-    $builder->addDefinitions([
-        'Twig_Environment' => \DI\get('twig')
-    ]);
-
     if ('prod' === $env) {
         $builder->enableCompilation(__DIR__ . '/../cache');
         $builder->enableDefinitionCache('container');
