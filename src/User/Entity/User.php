@@ -8,7 +8,7 @@ use Orion\User\Interfaces\UserInterface;
 /**
  * Class User
  *
- * @package Ares\User\Entity
+ * @package Orion\User\Entity
  */
 class User extends DataObject implements UserInterface
 {
