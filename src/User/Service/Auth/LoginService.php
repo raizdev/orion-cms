@@ -31,8 +31,8 @@ class LoginService
      */
     public function login(array $data): CustomResponseInterface
     {
-        $user = $this->userModel->find($data['username']);
-       
+        $user = $this->userModel->firstWhere('username', $data['username']);
+
         if (!$user || !password_verify($data['password'], $user->password)) {
             throw new LoginException(
                 __('Data combination was not found')
@@ -40,6 +40,7 @@ class LoginService
         }
 
         // TODO implement banService
+        
         $user->{UserInterface::COLUMN_IP_CURRENT} = $data[UserInterface::COLUMN_IP_CURRENT];
 
         $user->save();
