@@ -23,7 +23,8 @@ class RegisterService
      */
     public function __construct(
         private ConfigInterface $config,
-        private SessionInterface $session
+        private SessionInterface $session,
+        private UserModel $userModel
     ) {}
 
     /**
@@ -34,7 +35,7 @@ class RegisterService
     public function register(array $data): CustomResponseInterface
     {
         /** @var UserModel $user */
-        $user = UserModel::where('username', $data['username'])->orWhere('mail', $data['mail'])->get();
+        $user = $this->userModel->where('username', $data['username'])->orWhere('mail', $data['mail'])->get();
 
         if($user) {
             throw new RegisterException(
@@ -46,7 +47,7 @@ class RegisterService
         $this->isEligible($data);
 
         /** @var UserModel $user */
-        $user = UserModel::create($data);
+        $user = $this->userModel->request($data)->create();
         
         $this->session->set('user', $user);
 
@@ -68,7 +69,7 @@ class RegisterService
     {
         /** @var int $maxAccountsPerIp */
         $maxAccountsPerIp = $this->config->get('hotel_settings.register.max_accounts_per_ip');
-        $accountExistence = UserModel::where('ip_register', $data['ip_current'])->count();
+        $accountExistence = $this->userModel->where('ip_register', $data['ip_current'])->count();
 
         if ($accountExistence >= $maxAccountsPerIp) {
             throw new RegisterException(

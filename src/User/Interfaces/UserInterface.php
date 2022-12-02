@@ -23,6 +23,5 @@ interface UserInterface
     public const COLUMN_AUTH_TICKET = 'auth_ticket';
     public const COLUMN_IP_REGISTER = 'ip_register';
     public const COLUMN_IP_CURRENT = 'ip_current';
-    public const COLUMN_CREATED_AT = 'created_at';
-    public const COLUMN_UPDATED_AT = 'updated_at';
+    public const COLUMN_ACCOUNT_CREATED = 'account_created';
 }

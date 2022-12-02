@@ -92,6 +92,7 @@ class AuthController extends BaseController {
 
         $parsedData[UserInterface::COLUMN_IP_CURRENT] = $determinedIp;
         $parsedData[UserInterface::COLUMN_IP_REGISTER] = $determinedIp;
+        $parsedData[UserInterface::COLUMN_ACCOUNT_CREATED] = time();
 
         $customResponse = $this->registerService->register($parsedData);
 

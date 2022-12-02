@@ -1,2 +1,2 @@
-[2022-12-02T00:15:28.555158+01:00] Orion.ERROR: SQLSTATE[HY000]: General error: 1364 Field 'ip_register' doesn't have a default value [] []
-[2022-12-02T00:16:36.801000+01:00] Orion.ERROR: SQLSTATE[HY000]: General error: 1364 Field 'ip_current' doesn't have a default value [] []
+[2022-12-02T00:43:59.559704+01:00] Orion.ERROR: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'tes1t' for key 'username' [] []
+[2022-12-02T01:08:39.244548+01:00] Orion.WARNING: There is no associated model for update or the primary index was not found in the data. [] []
