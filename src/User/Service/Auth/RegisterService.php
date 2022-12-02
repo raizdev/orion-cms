@@ -7,6 +7,7 @@ use Orion\Framework\Interfaces\CustomResponseInterface;
 use Orion\Framework\Interfaces\HttpResponseCodeInterface;
 use Orion\User\Exception\RegisterException;
 use Orion\User\Model\UserModel;
+use Orion\User\Entity\User;
 
 /**
  * Class RegisterService
@@ -24,7 +25,8 @@ class RegisterService
     public function __construct(
         private ConfigInterface $config,
         private SessionInterface $session,
-        private UserModel $userModel
+        private UserModel $userModel,
+        private HashService $hashService
     ) {}
 
     /**
@@ -47,7 +49,8 @@ class RegisterService
         $this->isEligible($data);
 
         /** @var UserModel $user */
-        $user = $this->userModel->request($data)->create();
+        debug($this->getNewUser($data));
+        $user = $this->userModel->create($data);
         
         $this->session->set('user', $user);
 
@@ -80,5 +83,22 @@ class RegisterService
         }
 
         return true;
+    }
+
+    private function getNewUser(array $data): User
+    {
+        $user = new User();
+
+        return $user
+            ->setUsername($data['username'])
+            ->setPassword($this->hashService->hash($data['password']))
+            ->setMail($data['mail'])
+            ->setAccountCreated(time())
+            ->setCredits($this->config->get('hotel_settings.start_credits'))
+            ->setMotto($this->config->get('hotel_settings.start_motto'))
+            ->setIPRegister($data['ip_register'])
+            ->setIpCurrent($data['ip_current'])
+            ->setLastLogin(time())
+            ->setRank(1);
     }
 }

@@ -9,7 +9,7 @@ class UserModel extends DatabaseModel {
     protected $primary = 'id';
 
     protected $fillables = [
-        'id', 'username', 'password', 'mail', 'account_created', 'last_login', 'online', 'last_online', 'motto', 'look', 'gender', 'rank', 'credits', 'auth_ticket', 'avatar_bg', 'ip_register', 'ip_current'
+        'username', 'password', 'mail', 'account_created', 'last_login', 'online', 'last_online', 'motto', 'look', 'gender', 'rank', 'credits', 'auth_ticket', 'avatar_bg', 'ip_register', 'ip_current'
     ];
 
 }

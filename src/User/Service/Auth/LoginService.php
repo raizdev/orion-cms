@@ -32,7 +32,7 @@ class LoginService
     public function login(array $data): CustomResponseInterface
     {
         $user = $this->userModel->firstWhere('username', $data['username']);
-
+        debug($user);
         if (!$user || !password_verify($data['password'], $user->password)) {
             throw new LoginException(
                 __('Data combination was not found')
