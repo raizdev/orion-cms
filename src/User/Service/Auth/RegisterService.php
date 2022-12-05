@@ -5,6 +5,7 @@ use PHLAK\Config\Interfaces\ConfigInterface;
 use Odan\Session\SessionInterface;
 use Orion\Framework\Interfaces\CustomResponseInterface;
 use Orion\Framework\Interfaces\HttpResponseCodeInterface;
+use Orion\Framework\Service\ValidationService;
 use Orion\User\Exception\RegisterException;
 use Orion\User\Model\UserModel;
 use Orion\User\Entity\User;
@@ -26,7 +27,8 @@ class RegisterService
         private ConfigInterface $config,
         private SessionInterface $session,
         private UserModel $userModel,
-        private HashService $hashService
+        private HashService $hashService,
+        private ValidationService $validationService
     ) {}
 
     /**
@@ -36,6 +38,13 @@ class RegisterService
      */
     public function register(array $data): CustomResponseInterface
     {
+        $this->validationService->validate($parsedData, [
+            UserInterface::COLUMN_USERNAME => 'required|min:2|max:12|regex:/^[a-zA-Z\d]+$/',
+            UserInterface::COLUMN_MAIL => 'required|email|min:9',
+            UserInterface::COLUMN_PASSWORD => 'required|min:6',
+            'password_confirmation' => 'required|same:password'
+        ]);
+
         /** @var UserModel $user */
         $user = $this->userModel->where('username', $data['username'])->orWhere('mail', $data['mail'])->get();
 

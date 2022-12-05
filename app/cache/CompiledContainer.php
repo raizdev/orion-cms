@@ -14,6 +14,8 @@ class CompiledContainer extends DI\CompiledContainer{
   'PHLAK\\Config\\Interfaces\\ConfigInterface' => 'get8',
   'middlewares' => 'get9',
   'subEntry2' => 'get10',
+  'subEntry3' => 'get11',
+  'subEntry4' => 'get12',
 );
 
     protected function get1()
@@ -35,7 +37,6 @@ class CompiledContainer extends DI\CompiledContainer{
     protected function get3()
     {
         return $this->resolveFactory(static function ($container) {
-
         $session = new \Odan\Session\PhpSession();
         $session->setOptions([
             'name' => $_ENV['SESSION_NAME'],
@@ -94,10 +95,22 @@ class CompiledContainer extends DI\CompiledContainer{
         return $object;
     }
 
+    protected function get12()
+    {
+        return $this->delegateContainer->get('Odan\\Session\\SessionInterface');
+    }
+
+    protected function get11()
+    {
+        $object = new Odan\Session\Middleware\SessionMiddleware($this->get12());
+        return $object;
+    }
+
     protected function get9()
     {
         return [
             0 => $this->get10(),
+            1 => $this->get11(),
         ];
     }
 

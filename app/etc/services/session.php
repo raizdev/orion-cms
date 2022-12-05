@@ -7,7 +7,6 @@ use function DI\factory;
 
 return [
     SessionInterface::class => factory(function ($container) {
-
         $session = new PhpSession();
         $session->setOptions([
             'name' => $_ENV['SESSION_NAME'],

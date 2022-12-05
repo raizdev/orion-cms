@@ -3,6 +3,7 @@ namespace Orion\User\Service\Auth;
 
 use Odan\Session\SessionInterface;
 use Orion\Framework\Interfaces\CustomResponseInterface;
+use Orion\Framework\Service\ValidationService;
 use Orion\User\Interfaces\UserInterface;
 use Orion\User\Exception\LoginException;
 use Orion\User\Model\UserModel;
@@ -21,7 +22,8 @@ class LoginService
      */
     public function __construct(
         private UserModel $userModel,
-        private SessionInterface $session
+        private SessionInterface $session,
+        private ValidationService $validationService
     ) {}
 
     /**
@@ -31,8 +33,13 @@ class LoginService
      */
     public function login(array $data): CustomResponseInterface
     {
+        $this->validationService->validate($data, [
+            UserInterface::COLUMN_USERNAME => 'required',
+            UserInterface::COLUMN_PASSWORD => 'required'
+        ]);
+
         $user = $this->userModel->firstWhere('username', $data['username']);
-        debug($user);
+
         if (!$user || !password_verify($data['password'], $user->password)) {
             throw new LoginException(
                 __('Data combination was not found')
@@ -48,7 +55,7 @@ class LoginService
         $this->session->set('user', $user);
 
         return response()->setData([
-            'pagetime'  => 'home',
+            'pagetime'  => '/',
             'status'    => 'success',
             'message'   => __('Logged in successfully'),
         ]);

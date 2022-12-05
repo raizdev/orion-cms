@@ -3,11 +3,11 @@ namespace Orion\Controllers\Auth;
 
 use Sunrise\Http\Router\Annotation as Mapping;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use Odan\Session\SessionInterface;
 use Sunrise\Http\Message\ResponseFactory;
 use Sunrise\Http\Router\Annotation\Prefix;
 use Sunrise\Http\Router\Annotation\Route;
 
-use Orion\Framework\Service\ValidationService;
 use Orion\Framework\Controller\BaseController;
 use Orion\User\Interfaces\UserInterface;
 use Orion\User\Service\Auth\DetermineIpService;
@@ -20,8 +20,8 @@ class AuthController extends BaseController {
     public function __construct(
         private DetermineIpService $determineIpService,
         private LoginService $loginService,
-        private ValidationService $validationService,
-        private RegisterService $registerService
+        private RegisterService $registerService,
+        private SessionInterface $session
     ) {}
 
     #[Route(
@@ -42,11 +42,6 @@ class AuthController extends BaseController {
     {
         /** @var array $parsedData */
         $parsedData = $request->getParsedBody();
-
-        $this->validationService->validate($parsedData, [
-            UserInterface::COLUMN_USERNAME => 'required',
-            UserInterface::COLUMN_PASSWORD => 'required'
-        ]);
 
         /** @var string $determinedIp */
         $determinedIp = $this->determineIpService->execute();
@@ -80,13 +75,6 @@ class AuthController extends BaseController {
         /** @var array $parsedData */
         $parsedData = $request->getParsedBody();
 
-        $this->validationService->validate($parsedData, [
-            UserInterface::COLUMN_USERNAME => 'required|min:2|max:12|regex:/^[a-zA-Z\d]+$/',
-            UserInterface::COLUMN_MAIL => 'required|email|min:9',
-            UserInterface::COLUMN_PASSWORD => 'required|min:6',
-            'password_confirmation' => 'required|same:password'
-        ]);
-
         /** @var string $determinedIp */
         $determinedIp = $this->determineIpService->execute();
 
@@ -100,5 +88,26 @@ class AuthController extends BaseController {
             (new ResponseFactory)->createResponse(200),
             $customResponse
         );
+    }
+
+    #[Route(
+        name: 'logout',
+        path: '/logout',
+        methods: ['GET'],
+    )]
+
+    /**
+     * Returns a response without the Authorization header
+     * We could blacklist the token with redis-cache
+     *
+     * @param Request $request
+     *
+     * @return Response Returns a Response with the given Data
+     */
+    public function logout(Request $request)
+    {
+        $this->session->destroy();
+
+        return (new ResponseFactory)->createResponse(200)->withHeader('Location', '/');
     }
 }

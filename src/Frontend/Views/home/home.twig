@@ -1,6 +1,6 @@
 {% extends "base.twig" %} 
 {% block body %}
-{% if not player %}
+{% if not user %}
     {% include 'Auth/auth.twig' %}
 {%  else %}
     {% include 'home/main.twig' %}

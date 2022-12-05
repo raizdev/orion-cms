@@ -101,7 +101,7 @@ function WebInterface() {
                     password: $(".login-form [name=password]").val()
                 };
 
-                Web.ajax_manager.post("/auth/login/request", verification_data, function (result) {
+                Web.ajax_manager.post("/auth/sign-in", verification_data, function (result) {
                     $(".spinner-border").hide();
                 });
             }, 1000);
@@ -256,6 +256,13 @@ function WebPagesManagerInterface() {
                 if (result.location) {
                     window.location = result.location;
                     return null;
+                }
+
+                if(result.errors) {
+                    var errorTitle = result.errors[0].field;
+                    var errorMessage = result.errors[0].message;
+    
+                    Web.notifications_manager.create('error', errorMessage, errorTitle, (Number.isInteger(result.timer) ? result.timer : undefined), (result.link ? result.link : null));
                 }
 
                 // Create notification
@@ -452,65 +459,50 @@ function WebAjaxManagerInterface() {
             processData: false,
             contentType: false
         }).done(function (result) {
-
+            console.log(result)
             // Change full page
-            if (result.location) {
-                window.location = result.location;
+            if (result.data.location) {
+                window.location = result.data.location;
                 return null;
             }
 
+            if(result.errors) {
+                var errorTitle = result.errors[0].field;
+                var errorMessage = result.errors[0].message;
+
+                Web.notifications_manager.create('error', errorMessage, errorTitle, (Number.isInteger(result.timer) ? result.timer : undefined), (result.link ? result.link : null));
+            }
+
             // Change page
-            if (result.pagetime)
+            if (result.data.pagetime)
                 setTimeout(function () {
-                    window.location = result.pagetime
+                    window.location = result.data.pagetime
                 }, 2500);
 
             // Change page
-            if (result.loadpage)
+            if (result.data.loadpage)
                 Web.pages_manager.load(result.loadpage);
 
             // Replace page
-            if (result.replacepage)
+            if (result.data.replacepage)
                 Web.pages_manager.load(result.replacepage, null, true, null, true, true);
 
-            // Build modal
-            if (result.modal) {
-                $.magnificPopup.open({
-                    closeOnBgClick: false,
-                    items: [{
-                        modal: true,
-                        src: "/popup/" + result.modal,
-                        type: "ajax"
-                    }]
-                }, 0);
-            }
-
-            // Close popup
-            if (result.close_popup)
-                $.magnificPopup.close();
-
-            // Check if is form
-            if (form !== undefined) {
-                if (!result.captcha_error)
-                    form.find(".registration-recaptcha").removeClass("registration-recaptcha").removeAttr("data-sitekey").removeAttr("data-callback");
-            }
-
             // Create notification
-            if (!isEmpty(result.status) && !isEmpty(result.message))
-                Web.notifications_manager.create(result.status, result.message, (result.title ? result.title : null), (Number.isInteger(result.timer) ? result.timer : undefined), (result.link ? result.link : null));
+            if (!isEmpty(result.data.status) && !isEmpty(result.data.message))
+                Web.notifications_manager.create(result.data.status, result.data.message, (result.data.title ? result.data.title : null));
 
             // Callback if exists
             if (typeof callback === "function")
-                callback(result);
+                callback(result.data);
         });
     };
 }
 
 function WebNotificationsManagerInterface() {
     this.titles_configutation = {
-        success: 'Success',
-        error: 'Error',
-        info: 'Info'
+        success: 'success',
+        error: 'error',
+        info: 'info'
     };
     this.notifications = {};
 
@@ -546,69 +538,23 @@ function WebNotificationInterface(manager, id, type, message, title, timer, link
 
 
     this.init = function () {
-        var self = this;
-        var template = [
-            '<div class="notification-container" data-id="' + this.id + '" data-type="' + this.type + '">\n' +
-            '    <a href="#" class="notification-close"></a>\n' +
-            '    <div class="notification-title">' + (this.title != null ? this.title : this.manager.titles_configutation[this.type]) + '</div>\n' +
-            '    <div class="notification-content">' + this.message + '</div>\n' +
-            '</div>'
-        ].join("");
+        var self = this
 
-        this.notification = $(template).appendTo(".notifications-container");
-
-        this.notification.find(".notification-close").click(function () {
-            self.close();
+        const notyf = new Notyf({
+            position: {
+                x: 'right',
+                y: 'top',
+            },
+            duration: 5000,
+            dismissible: true
         });
 
-        if (this.link != null) {
-            this.notification.click(function () {
-                if ($(this).hasClass("notification-close"))
-                    return null;
+        const title = "";
+        const content = "<div class='notification-content'>" + this.message + "</div>";
 
-                var href = self.link.replace(Configuration.settings.site.domain + "/", "").replace(Configuration.settings.site.domain, "");
-                if (!href)
-                    href = "home";
-
-                Web.page_container.load(href);
-            });
-        }
-
-        if (this.timer !== 0) {
-            this.notification.hover(function () {
-                clearTimeout(self.timeout);
-            }, function () {
-                self.timeout = setTimeout(function () {
-                    self.close();
-                }, self.timer * 1000);
-            });
-        }
-
-        this.show();
-    };
-
-    this.show = function () {
-        var self = this;
-
-        if (this.timer === 0)
-            this.notification.fadeIn();
-        else {
-            this.notification.fadeIn();
-            this.timeout = setTimeout(function () {
-                self.close();
-            }, this.timer * 1000);
-        }
-    };
-
-    this.close = function () {
-        var self = this;
-        this.notification.animate({
-            "opacity": 0
-        }, 300, function () {
-            $(this).slideUp(400, function () {
-                self.manager.destroy(self.id);
-            });
+        notyf.open({
+            type: (this.manager.titles_configutation[this.type] == "error" ? "error" : "success"),
+            message: (this.title) ? title + this.message : this.message
         });
     };
 }
-
